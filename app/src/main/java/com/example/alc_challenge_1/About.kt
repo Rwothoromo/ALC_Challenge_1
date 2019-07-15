@@ -9,27 +9,28 @@ import android.webkit.SslErrorHandler
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import kotlinx.android.synthetic.main.activity_about.*
 
 
 class About : AppCompatActivity() {
 
-    private var webView: WebView? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+//        setContentView(R.layout.activity_about)
 
-        webView = findViewById(R.id.aboutWebView)
-        webView!!.webViewClient = object : WebViewClient() {
+        aboutWebView.webViewClient = object : WebViewClient() {
             override fun onReceivedSslError(v: WebView, handler: SslErrorHandler, er: SslError) {
                 handler.proceed()
             }
         }
-        webView!!.settings.javaScriptEnabled = true
-        webView!!.settings.loadWithOverviewMode = true
-        webView!!.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
-        webView!!.settings.useWideViewPort = true
-        webView!!.loadUrl(getString(R.string.alc_url))
+
+        // JavaScript settings
+        aboutWebView.settings.javaScriptEnabled = true
+        aboutWebView.settings.loadWithOverviewMode = true
+        aboutWebView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+        aboutWebView.settings.useWideViewPort = true
+//        aboutWebView.loadUrl(getString(R.string.alc_url))
+        aboutWebView.loadUrl("https://andela.com/alc/")
 
         if (supportActionBar != null) {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -37,7 +38,7 @@ class About : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
+        if (item.itemId == R.id.home) {
             onBackPressed()
             return true
         }
