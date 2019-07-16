@@ -1,40 +1,35 @@
 package com.example.alc_challenge_1
 
-import android.R
 import android.net.http.SslError
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.webkit.SslErrorHandler
-import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.activity_profile.*
 
 
 class About : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_about)
-
-        aboutWebView.webViewClient = object : WebViewClient() {
-            override fun onReceivedSslError(v: WebView, handler: SslErrorHandler, er: SslError) {
-                handler.proceed()
-            }
-        }
+        setContentView(R.layout.activity_about)
+        setSupportActionBar(toolbar)
 
         // JavaScript settings
         aboutWebView.settings.javaScriptEnabled = true
         aboutWebView.settings.loadWithOverviewMode = true
-        aboutWebView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
+        aboutWebView.settings.domStorageEnabled = true
         aboutWebView.settings.useWideViewPort = true
-//        aboutWebView.loadUrl(getString(R.string.alc_url))
-        aboutWebView.loadUrl("https://andela.com/alc/")
+        aboutWebView.settings.javaScriptCanOpenWindowsAutomatically = true
+        aboutWebView.webViewClient = SSLTolerentWebViewClient()
 
-        if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
+        // launch the url inside the webView
+        aboutWebView.loadUrl(getString(R.string.alc_url))
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -45,4 +40,10 @@ class About : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+}
+
+internal class SSLTolerentWebViewClient : WebViewClient() {
+    override fun onReceivedSslError(webView: WebView, handler: SslErrorHandler, error: SslError) {
+        handler.proceed() // Ignore SSL certificate errors
+    }
 }
