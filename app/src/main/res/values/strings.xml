@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">ALC Challenge 1</string>
+    <string name="app_name">ALC 4 Phase 1</string>
     <string name="welcome">Welcome to ALC 4.0!</string>
     <string name="about">About ALC</string>
     <string name="my_profile">MY PROFILE</string>
-    <string name="alc_4_phase_1">ALC 4 Phase 1</string>
     <string name="title_activity_profile">Profile</string>
     <string name="photo">photo</string>
     <string name="full_name">Elijah Rwothoromo</string>

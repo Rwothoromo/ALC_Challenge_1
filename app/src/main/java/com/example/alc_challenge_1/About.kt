@@ -8,7 +8,6 @@ import android.webkit.SslErrorHandler
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.activity_profile.*
 
 
 class About : AppCompatActivity() {
@@ -16,7 +15,6 @@ class About : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-        setSupportActionBar(toolbar)
 
         // JavaScript settings
         aboutWebView.settings.javaScriptEnabled = true
@@ -33,7 +31,7 @@ class About : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.home) {
+        if (item.itemId == android.R.id.home) {
             onBackPressed()
             return true
         }
